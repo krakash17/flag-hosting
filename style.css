@@ -8,7 +8,7 @@ html,body{
   background-attachment: fixed;
 }
 
-  
+
   
 .controls{
   margin: 15px 0;
@@ -18,7 +18,7 @@ html,body{
   
 .support{
   margin: 20px auto;
-  width: 500px;
+  width: 53%;
   text-align: center
 
 }
@@ -50,12 +50,14 @@ html,body{
 }
   
 .screen{
-  width: 800px;
+  width: 1000px;
   height: 480px;
   border: 10px solid black;
   margin: 0 auto;
   background: #fff;
-  position: relative
+  position: relative;
+  background: bisque;
+  /* background-image: url('src/red_fort.png'); */
 
 }
 
@@ -64,7 +66,7 @@ html,body{
 .flag-stand{
   width: 200px;
   margin: 0 auto;
-  height: 315px;
+  height: 322px;
   position: absolute;
   bottom: 0px;
   left: 45%;
@@ -146,7 +148,7 @@ ol{
 .arrow-up{
   position: absolute;
   top: 0;
-  left: 0.8em;
+  left: 0.6em;
   width: 0;
   height: 0;
   border-left: 5px solid transparent;
