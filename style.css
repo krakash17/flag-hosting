@@ -148,7 +148,7 @@ ol{
 .arrow-up{
   position: absolute;
   top: 0;
-  left: 0.6em;
+  left: 0.65em;
   width: 0;
   height: 0;
   border-left: 5px solid transparent;
@@ -185,4 +185,30 @@ ol{
         
     
     
-  
+  @media (max-width: 400px) {
+
+    .screen{
+      width: 293px;
+      height: 396px;
+      border: 3px solid black;
+    }
+
+     .first-heading{
+      
+      font-size: 1.5rem;
+     }
+     .support{
+       width:98%;
+     }
+     .greeting{
+      font-size: 1.5rem;
+     }
+     .flag-pool{
+       height: 275px;
+     }
+     .flag-stand{
+      height: 286px;
+
+     }
+         
+  }
