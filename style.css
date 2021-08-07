@@ -210,5 +210,21 @@ ol{
       height: 286px;
 
      }
+
+
+    
+
+
+   
+
+
          
   }
+
+  @media (min-width:501px) and (max-width: 800px) {
+    .screen{
+      width: 500px;
+    }
+  
+ 
+ }
