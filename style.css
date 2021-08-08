@@ -56,8 +56,9 @@ html,body{
   margin: 0 auto;
   background: #fff;
   position: relative;
-  background: bisque;
-  /* background-image: url('src/red_fort.png'); */
+  background-repeat: round;
+  /* background: bisque; */
+  background-image: url('src/red_fort.png');
 
 }
 
@@ -78,7 +79,7 @@ html,body{
   position: absolute;
   left: 14px;
   bottom: 0;
-  border-left: 3px solid #1e1e1e;
+  border-left: 7px solid #1e1e1e;
   height: 310px;
   z-index: 10
 
@@ -148,7 +149,7 @@ ol{
 .arrow-up{
   position: absolute;
   top: 0;
-  left: 0.65em;
+  left: 0.7582em;
   width: 0;
   height: 0;
   border-left: 5px solid transparent;
@@ -182,8 +183,25 @@ ol{
       i{
         font-size: 1.4em
       }
-        
+     
+      
+      .swal2-html-container {
+        display: block !important;
+        font-style: italic!important;
+        font-size: 2rem!important;
+        color: indianred!important;
+        font-weight: bold!important;
+
+      }     
+
+      .swal2-popup{
+        width:1000px !important;
+        margin-right: 1.1%!important;
+    margin-bottom: 2%!important;
+    background-color: darkblue!important;
+      }
     
+
     
   @media (max-width: 500px) {
 

@@ -11,7 +11,7 @@
   <script src="https://code.jquery.com/jquery-3.3.1.js"></script>
   <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script>
   <script src='http://cdnjs.cloudflare.com/ajax/libs/gsap/latest/TweenMax.min.js' type='text/javascript'></script>
-
+  <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
 
   <title>Document</title>
@@ -67,6 +67,12 @@
     <div class="controls">
       <button id="openFlag" class="btn btn-warning">Open flag</button>
       <button id="flag-hoist" class="btn btn-default"> Hoist the flag </button>
+      <div id="voice-cmd">
+        
+      <img id="voice-on" src="src/mic1.png" style="width:46px;"></input>
+        <img src="src/mic2.gif" id="voice-off" style="width:150px;" hidden/>
+      </div>
+
       <!-- <button id="resetBtn" class="btn btn-success">Refresh</button> -->
     </div>
     <!--/controls-->
@@ -96,25 +102,37 @@
 
   var x = window.matchMedia("(max-width: 500px)")
   var canvas = document.getElementById("confetti");
+  var sound = new Audio('nationalanthem.mp3')
+
+  var openFlag = document.getElementById("openFlag")
+  var flag = document.getElementById("flag"),
+    hoistBtn = document.getElementById("flag-hoist"),
+    resetBtn = document.getElementById("resetBtn"),
+    pigeon = document.getElementById("pigeon"),
+    txt = document.getElementById("txt"),
+    myname = document.getElementById("myName"),
+    pro = new TimelineMax(),
+    pro2 = new TimelineMax(),
+    proSt = "Happy Independence Day"
+
 
   window.onload = function () {
-    var flag = document.getElementById("flag"),
 
-      openFlag = document.getElementById("openFlag"),
-      hoistBtn = document.getElementById("flag-hoist"),
-      resetBtn = document.getElementById("resetBtn"),
-      pigeon = document.getElementById("pigeon"),
-      txt = document.getElementById("txt"),
-      myname = document.getElementById("myName"),
-      pro = new TimelineMax(),
-      pro2 = new TimelineMax(),
-      proSt = "Happy Independence Day"
+
+
+
+
+
+
 
 
     hoistBtn.disabled = true;
 
     txt.hidden = true;
     myname.innerHTML = "KITE Team";
+
+
+
     /*openFlag event*/
     openFlag.onclick = function () {
       $("#flag").show();
@@ -124,7 +142,10 @@
     /*hoistingFlag event*/
     hoistBtn.onclick = function () {
       canvas.hidden = false;
-      new Audio('nationalanthem.mp3').play();
+      sound.play();
+
+
+
       txt.hidden = false;
 
       if (x.matches) {
@@ -160,16 +181,202 @@
         ease: Elastic.easeOut.config(0.4, 0.2),
         y: 0
       }, 1, allDone)
+
+    }
+
+
+
+    sound.onended = function () {
+      Swal.fire({
+        title: '',
+        text: 'HAPPY INDEPENDENCE DAY',
+        imageUrl: 'src/intern.jpeg',
+        imageWidth: 800,
+        imageHeight: 300,
+        imageAlt: 'Custom image',
+      });
+
     }
 
     resetBtn.onclick = function () {
       reload();
     }
     function allDone() {
+      swal();
       proST.revert();
 
     }
   }
+
+
+
+
+  var cmd = {
+    // (A) PROPERTIES
+    // ! Define your recognized colors here !
+    voices: ["hello", "akash", "vipul"],
+    recognition: null, // Speech recognition object
+
+    hwrap: null, // HTML speech on/off button wrapper
+    hon: null, // HTML speech on button
+    hoff: null, // HTML speech off button
+
+    // (B) INIT
+    init: function () {
+      // (B1) GET HTML ELEMENTS
+      cmd.hwrap = document.getElementById("voice-cmd");
+      cmd.hon = document.getElementById('voice-on');
+      cmd.hoff = document.getElementById('voice-off');
+
+      // (B2) SPEECH RECOGNITION SUPPORTED - ASK FOR PERMISSION
+      // ! WILL FAIL IF NO MICROPHONE IS ATTACHED TO COMPUTER !
+      if (window.hasOwnProperty('SpeechRecognition') || window.hasOwnProperty('webkitSpeechRecognition')) {
+        navigator.mediaDevices.getUserMedia({ audio: true })
+          .then(function (stream) {
+            cmd.hon.onclick = cmd.start;
+            cmd.hoff.onclick = cmd.stop;
+            cmd.hoff.disabled = true;
+          })
+          .catch(function (err) {
+            cmd.hwrap.innerHTML = "Please enable access and attach a microphone.";
+          });
+      }
+
+      // (B3) SPEECH RECOGNITION NOT SUPPORTED
+      else {
+        cmd.hwrap.innerHTML = "Speech Recognition not supported on your browser";
+      }
+    },
+
+    // (C) START VOICE COMMAND
+    start: function () {
+      // (C1) CREATE SPEECH RECOGNITION OBJECT
+      const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+      cmd.recognition = new SpeechRecognition();
+
+      // (C2) SET OPTIONS
+      cmd.recognition.continuous = false;
+      cmd.recognition.interimResults = false;
+      cmd.recognition.lang = "en-US";
+
+      // (C3) WHAT TO DO ON ERROR + CHANGE BACKGROUND COLOR ON RESULT
+      cmd.recognition.onerror = function (evt) {
+        console.log(evt);
+      };
+      cmd.recognition.onresult = function (evt) {
+        var voice = evt.results[0][0].transcript.toLowerCase();
+        // RECOGNIZED
+        if (voice === "open") {
+          $("#flag").show();
+          hoistBtn.disabled = false;
+         
+        } else
+          if (voice === "close") {
+            $("#flag").hide();
+            hoistBtn.disabled = true;
+            if (x.matches) {
+        pro.to(flag, 10, {
+
+          bottom: 10,
+          ease: SlowMo.ease.config(0.01, 0.01)
+        })
+
+      }
+      else {
+        pro.to(flag, 8, {
+
+          bottom: 20,
+          ease: SlowMo.ease.config(0.01, 0.01)
+        })
+
+      }
+          }
+          else
+            if (voice === "host") {
+              cmd.hon.hidden = true;
+              cmd.hoff.hidden = true;
+              canvas.hidden = false;
+              sound.play();
+              hoistBtn.disabled = true;
+              txt.hidden = false;
+
+              if (x.matches) {
+                pro.to(flag, 10, {
+
+                  bottom: 200,
+                  ease: SlowMo.ease.config(0.01, 0.01)
+                })
+
+              }
+              else {
+                pro.to(flag, 8, {
+
+                  bottom: 230,
+                  ease: SlowMo.ease.config(0.01, 0.01)
+                })
+
+              }
+
+
+
+              pro.to(pigeon, 3, {
+                scale: "10",
+                x: -1400,
+                y: -500,
+                ease: SlowMo.ease.config(0.6, 0.6)
+              })
+              pro.staggerFrom(proST, 2.5, {
+                opacity: 0,
+                autoAlpha: 0,
+                rotationX: 90,
+                transformOrigin: 100,
+                ease: Elastic.easeOut.config(0.4, 0.2),
+                y: 0
+              }, 1, allDone)
+
+
+
+              function allDone() {
+                swal();
+                proST.revert();
+
+              }
+              cmd.stop();
+             
+            }
+
+
+            // NOT RECOGNIZED
+            else {
+              alert(voice + " not recognized - Please try again");
+            }
+
+        cmd.stop();
+      };
+
+      // (C4) GO!
+      cmd.hon.hidden = true;
+      cmd.hoff.hidden = false;
+      cmd.recognition.start();
+      sound.onended = function (){
+        cmd.hon.hidden = false;
+        cmd.hoff.hidden = true;
+
+      }
+    },
+
+    // (D) STOP/CANCEL SPEECH RECOGNITION
+    stop: function () {
+      if (cmd.recognition != null) {
+        cmd.recognition.stop();
+        cmd.recognition = null;
+        cmd.hon.hidden = false;
+        cmd.hoff.hidden = true;
+      }
+    }
+  };
+
+  window.addEventListener("DOMContentLoaded", cmd.init);
 
 
 
