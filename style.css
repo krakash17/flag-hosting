@@ -1,5 +1,5 @@
 
-@import "compass/css3";
+/* @import "compass/css3"; */
 
 html,body{
   margin: 0;
@@ -50,15 +50,16 @@ html,body{
 }
   
 .screen{
-  width: 1000px;
-  height: 480px;
-  border: 10px solid black;
+  width: 100%;
+  height: 550px;
+  /* border: 10px solid black; */
   margin: 0 auto;
   background: #fff;
   position: relative;
   background-repeat: round;
   /* background: bisque; */
-  background-image: url('src/red_fort.png');
+  z-index:-1;
+  background-image: url('src/redfor2.jpg');
 
 }
 
@@ -67,10 +68,10 @@ html,body{
 .flag-stand{
   width: 200px;
   margin: 0 auto;
-  height: 322px;
+  height: 471px;
   position: absolute;
-  bottom: 0px;
-  left: 45%;
+  bottom: 15px;
+  left: 48.3%;
 
 }
  
@@ -80,8 +81,29 @@ html,body{
   left: 14px;
   bottom: 0;
   border-left: 7px solid #1e1e1e;
-  height: 310px;
+  height: 459px;
   z-index: 10
+
+}
+
+.flag-base0{
+  position: absolute;
+  left: -31px;
+  bottom: 1px;
+  border-left: 1px solid #1e1e1e;
+  height: 18px;
+  z-index: 10;
+  width: 50%;
+
+}
+.flag-base1{
+  position: absolute;
+  left: -11px;
+  bottom: 19px;
+  border-left: 1px solid #1e1e1e;
+  height: 15px;
+  z-index: 10;
+  width: 29%;
 
 }
 
@@ -99,7 +121,7 @@ html,body{
   
 #flag{
   position: absolute;
-  bottom: 0;
+  bottom: 41px;
   left: -50;
   width: 100px;
   display: none
@@ -157,6 +179,9 @@ ol{
   border-bottom: 12px solid #1e1e1e;
 
 }
+.btn{
+  font-size: 2rem !important;
+}
 
 
 .social{
@@ -209,6 +234,10 @@ ol{
       width: 293px;
       height: 396px;
       border: 3px solid black;
+    }
+    .wrap{
+      max-width: 100%;
+      overflow-x: hidden;
     }
 
      .first-heading{

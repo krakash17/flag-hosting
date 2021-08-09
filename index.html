@@ -14,7 +14,7 @@
   <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
 
-  <title>Document</title>
+  <title>Independence Day</title>
 </head>
 
 <body>
@@ -25,31 +25,33 @@
 
 
     <div class="support">
-      <h3 class="first-heading" style="    font-style: italic;
+      <h2 class="first-heading" style="font-style: italic;
           font-family: system-ui;
-          color: coral;">Take a chance to hoist our Indian Flag</h4>
-        <ol>
-          <li style="    font-style: italic;
+          color: #FF9933">Happpy 75th Independence day</h4>
+
+        <h4 style="    font-style: italic;
         font-family: system-ui;
-        color:springgreen">Click on "orange(Open flag)" button and then click on "Hoist the flag(white)" button</li>
-        </ol>
+        color:#000080">Click on "orange(Open flag)" button and then click on "Hoist the flag(white)" button</h4>
 
     </div>
     <div class="screen">
 
-      <h2 class="greeting text-center" hidden style="    font-style: italic;
+      <h2 class="greeting text-center" hidden style="font-style: italic;
       font-family: monospace;
-      color: chocolate;
-      font-weight: bold;" id="txt">Happy Independence Day!</h2>
-      <h2 class="greeting text-center" style="    font-style: italic;
+      color: #138808;
+      font-weight: bold;" id="txt">Jai Hind</h2>
+      <!-- <h2 class="greeting text-center" style="    font-style: italic;
       font-family: monospace;
       color: steelblue;
-      font-weight: bold;" id="txt2">Jai Hind</h2>
+      font-weight: bold;" id="txt2"></h2> -->
       <div class="flag-stand">
         <div class="arrow-up"></div>
         <div class="flag-pool">
         </div>
         <img id="flag" class="flag" src="src/flag.gif" alt="" />
+        <div class="flag-base1" style="background: black;"></div>
+      
+        <div class="flag-base0" style="background: black;"></div>
       </div>
 
       <div class="steps three"></div>
@@ -65,19 +67,20 @@
 
 
     <div class="controls">
-      <button id="openFlag" class="btn btn-warning">Open flag</button>
-      <button id="flag-hoist" class="btn btn-default"> Hoist the flag </button>
+      <button id="openFlag" class="btn" style="background-color: #FF9933">Open Flag</button>
+      <button id="flag-hoist" class="btn" style="background-color:#FFFFFF; color:  #000080;">  Hoist the Flag </button>
+      <button id="resetBtn" class="btn" style="background-color:  #138808">Refresh</button>
       <div id="voice-cmd">
-        
-      <img id="voice-on" src="src/mic1.png" style="width:46px;"></input>
-        <img src="src/mic2.gif" id="voice-off" style="width:150px;" hidden/>
+
+        <img id="voice-on" src="src/mic1.png" style="width:46px;"></input>
+        <img src="src/mic2.gif" id="voice-off" style="width:150px;" hidden />
       </div>
 
-      <!-- <button id="resetBtn" class="btn btn-success">Refresh</button> -->
+      
     </div>
     <!--/controls-->
 
-
+<!-- 
     <div class="cr">
       <p>UR's <a id="myName" style="color: cornflowerblue;" target="_blank"></a>
         <i class="fa fa-heart" id="heart"></i>.
@@ -86,7 +89,7 @@
 
       </div>
 
-    </div>
+    </div> -->
 
 
 
@@ -110,7 +113,6 @@
     resetBtn = document.getElementById("resetBtn"),
     pigeon = document.getElementById("pigeon"),
     txt = document.getElementById("txt"),
-    myname = document.getElementById("myName"),
     pro = new TimelineMax(),
     pro2 = new TimelineMax(),
     proSt = "Happy Independence Day"
@@ -118,20 +120,7 @@
 
   window.onload = function () {
 
-
-
-
-
-
-
-
-
     hoistBtn.disabled = true;
-
-    txt.hidden = true;
-    myname.innerHTML = "KITE Team";
-
-
 
     /*openFlag event*/
     openFlag.onclick = function () {
@@ -143,15 +132,11 @@
     hoistBtn.onclick = function () {
       canvas.hidden = false;
       sound.play();
-
-
-
       txt.hidden = false;
-
       if (x.matches) {
         pro.to(flag, 10, {
 
-          bottom: 200,
+          bottom: 345,
           ease: SlowMo.ease.config(0.01, 0.01)
         })
 
@@ -159,7 +144,7 @@
       else {
         pro.to(flag, 8, {
 
-          bottom: 230,
+          bottom: 390,
           ease: SlowMo.ease.config(0.01, 0.01)
         })
 
@@ -169,8 +154,8 @@
 
       pro.to(pigeon, 3, {
         scale: "10",
-        x: -1400,
-        y: -500,
+        x: -1800,
+        y: -300,
         ease: SlowMo.ease.config(0.6, 0.6)
       })
       pro.staggerFrom(proST, 2.5, {
@@ -199,7 +184,28 @@
     }
 
     resetBtn.onclick = function () {
-      reload();
+      // canvas.hidden = true;
+      // sound.pause();
+      // sound.currentTime = 0;
+      // $("#flag").hide();
+      //       hoistBtn.disabled = true;
+      //       if (x.matches) {
+      //         pro.to(flag, 1, {
+
+      //           bottom: 10,
+      //           ease: SlowMo.ease.config(0.01, 0.01)
+      //         })
+
+      //       }
+      //       else {
+      //         pro.to(flag, 1, {
+
+      //           bottom: 20,
+      //           ease: SlowMo.ease.config(0.01, 0.01)
+      //         })
+
+      //       }
+      location.reload();
     }
     function allDone() {
       swal();
@@ -269,27 +275,27 @@
         if (voice === "open") {
           $("#flag").show();
           hoistBtn.disabled = false;
-         
+
         } else
           if (voice === "close") {
             $("#flag").hide();
             hoistBtn.disabled = true;
             if (x.matches) {
-        pro.to(flag, 10, {
+              pro.to(flag, 10, {
 
-          bottom: 10,
-          ease: SlowMo.ease.config(0.01, 0.01)
-        })
+                bottom: 10,
+                ease: SlowMo.ease.config(0.01, 0.01)
+              })
 
-      }
-      else {
-        pro.to(flag, 8, {
+            }
+            else {
+              pro.to(flag, 8, {
 
-          bottom: 20,
-          ease: SlowMo.ease.config(0.01, 0.01)
-        })
+                bottom: 20,
+                ease: SlowMo.ease.config(0.01, 0.01)
+              })
 
-      }
+            }
           }
           else
             if (voice === "host") {
@@ -303,7 +309,7 @@
               if (x.matches) {
                 pro.to(flag, 10, {
 
-                  bottom: 200,
+                  bottom: 345,
                   ease: SlowMo.ease.config(0.01, 0.01)
                 })
 
@@ -311,7 +317,7 @@
               else {
                 pro.to(flag, 8, {
 
-                  bottom: 230,
+                  bottom: 390,
                   ease: SlowMo.ease.config(0.01, 0.01)
                 })
 
@@ -342,7 +348,7 @@
 
               }
               cmd.stop();
-             
+
             }
 
 
@@ -358,7 +364,7 @@
       cmd.hon.hidden = true;
       cmd.hoff.hidden = false;
       cmd.recognition.start();
-      sound.onended = function (){
+      sound.onended = function () {
         cmd.hon.hidden = false;
         cmd.hoff.hidden = true;
 
